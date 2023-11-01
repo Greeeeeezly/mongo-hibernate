@@ -14,7 +14,7 @@ public class Resident {
     private String firstName;
     private String lastName;
     private Integer house;
-    private Apartment apartment;
+    private List<Apartment> apartment;
 
     private Passport passport;
 
@@ -54,7 +54,7 @@ public class Resident {
         this.lastName = lastName;
     }
 
-    public Resident(LocalDate check_in, String firstName, String lastName, Integer house, Apartment apartment, Passport passport) {
+    public Resident(LocalDate check_in, String firstName, String lastName, Integer house, List<Apartment> apartment, Passport passport) {
         this.check_in = check_in;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -71,12 +71,20 @@ public class Resident {
         this.house = house;
     }
 
-    public Apartment getApartment() {
+    public List<Apartment> getApartment() {
         return apartment;
     }
 
-    public void setApartment(Apartment appartment) {
-        this.apartment = appartment;
+    public void setApartment(List<Apartment> apartment) {
+        this.apartment = apartment;
+    }
+
+    public Passport getPassport() {
+        return passport;
+    }
+
+    public void setPassport(Passport passport) {
+        this.passport = passport;
     }
 
     @Override

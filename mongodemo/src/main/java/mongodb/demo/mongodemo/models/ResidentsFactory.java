@@ -4,7 +4,9 @@ import com.github.javafaker.Faker;
 
 import java.time.LocalDate;
 import java.time.ZoneOffset;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
@@ -22,6 +24,19 @@ public class ResidentsFactory {
     public Integer house(){return faker.number().numberBetween(1,6);}
     public Apartment apartment(){return new Apartment(faker.number().numberBetween(1,500),
             faker.number().numberBetween(50,100), faker.number().numberBetween(2,3));}
+    public List<Apartment> generateApartments() {
+        List<Apartment> apartments = new ArrayList<>();
+
+        Random random = new Random();
+        int numberOfApartments = random.nextInt(2) + 1; // Генерируем случайное число от 1 до 2
+        for (int i = 0; i < numberOfApartments; i++) {
+            Apartment apartment = new Apartment(faker.number().numberBetween(1,500),
+                    faker.number().numberBetween(50,100), faker.number().numberBetween(2,3));
+            apartments.add(apartment);
+        }
+        return apartments;
+    }
+
     public String generateCountry(){
         int randomChoice = faker.random().nextInt(2);
         if (randomChoice == 0) {
@@ -42,7 +57,7 @@ public class ResidentsFactory {
     }
 
 public Resident make(UnaryOperator<Resident>...residents) {
-    final Resident result = new Resident(check_ined(),firstName(), lastName(),house(),apartment(),passport());
+    final Resident result = new Resident(check_ined(),firstName(), lastName(),house(),generateApartments(),passport());
     Stream.of(residents).forEach(v->v.apply(result));
     return result;
 }

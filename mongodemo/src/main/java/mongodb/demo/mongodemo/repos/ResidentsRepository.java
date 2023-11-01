@@ -10,5 +10,6 @@ import java.util.List;
 
 @Repository
 public interface ResidentsRepository extends MongoRepository<Resident, String> {
-
+    @Query("{'passport.country': 'Ukraine'}")
+    List<Resident> findResidentsFromUkraine();
 }

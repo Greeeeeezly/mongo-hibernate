@@ -1,5 +1,6 @@
 package mongodb.demo.mongodemo.services.impl;
 
+import mongodb.demo.mongodemo.models.HousesCount;
 import mongodb.demo.mongodemo.models.Resident;
 import mongodb.demo.mongodemo.repos.ResidentsRepository;
 import mongodb.demo.mongodemo.services.ResidentsService;
@@ -7,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
-import org.springframework.data.mongodb.core.aggregation.MatchOperation;
-import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -61,6 +60,13 @@ public class ResidentsServiceImpl implements ResidentsService {
     public List<Resident> getAllResidents() {
         return residentsRepo.findAll();
     }
+
+    @Override
+    public List<Resident> findResidentsFromUkraine() {
+        return residentsRepo.findResidentsFromUkraine();
+    }
+
+
 
    /* @Override
     public Page<Resident> getResidents(Pageable pageable) {
